@@ -1,24 +1,30 @@
 // React core
 import React from "react";
 // M-UI core
-import Link from "@material-ui/core/Link";
-import Hidden from "@material-ui/core/Hidden";
 import {makeStyles, createStyles, Theme} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import 'fontsource-roboto';
+// Contexts
+import {NavContext} from '../contexts/navContext';
 
 type NavProps = {
-    chosen: string | null
+    chosen: string | null,
+    onClose?: any
 };
 
+type Scroller = {
+    about: number | null,
+    events: number | null,
+    teams: number | null,
+    members: number | null
+}
+
 type LinkProps = {
-    chosen: boolean,
-    children: React.ReactNode
+    label: keyof Scroller,
+    onClose?: any
 };
+
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     nav: {
-        flexGrow: 1,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -33,56 +39,51 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             alignItems: "space-around"
         }
     },
-    navLink: {
-        fontWeight: 600,
-        fontFamily: "Roboto, 'Sans sherif'",
-        '&:hover': {
-            color: "#4c4c4c",
-            cursor: "pointer"
+    navLink: {        
+        padding: "0 30px",
+        '&:hover h5': {
+            color: "#553bff!important"
         }
     }
 }));
 
-const NavLink: React.FC<LinkProps> = ({chosen, children}: LinkProps) => {
+const NavLink: React.FC<LinkProps> = ({label, onClose}: LinkProps) => {
+    const classes = useStyles();
+    const {chosen, setChosen, about, events, teams, members} = React.useContext(NavContext)!;
+    const scroller: Scroller = {
+        about: about,
+        events: events,
+        teams: teams,
+        members: members
+    }
+    const isChosen = chosen === String(label).toLowerCase();
+    const clickHandler = (choice: keyof typeof scroller ) => {
+        window.scrollTo(0, scroller[choice]!);
+        console.log((scroller[choice])+ "    " + choice);
+        setChosen(choice);
+        if(onClose != null || onClose !== undefined) onClose();
+    }
+
     const style = {
-        textDecoration: "none",
-        color: chosen ? "#4c4c4c" : "#8f8f8f"
+        color: isChosen ? "#553bff" : "#444444",
+        cursor: "pointer",
+        fontFamily: "Roboto medium, Sans sheruf, Helvetica",
+        fontSize: '1.2rem'  
     }
     return(
-      <Link style={style}>{children}</Link>
+      <div className={classes.navLink} onClick={e => clickHandler(String(label).toLowerCase() as keyof Scroller)}><h5 style={style}> {label} </h5></div>
     );
 };
 
-export const Nav: React.FC<NavProps> = ( { chosen }: NavProps) => {
+export const Nav: React.FC<NavProps> = ( { chosen, onClose }: NavProps) => {
     const classes = useStyles();
+    
     return(
         <div className={classes.nav}>
-            <NavLink chosen={chosen==="news"}>
-                <Typography
-                    variant={"body1"}
-                    className={classes.navLink}
-                >News</Typography>
-            </NavLink>
-            <NavLink chosen={chosen==="events"}>
-                <Typography
-                    variant={"body1"}
-                    className={classes.navLink}
-                >Events</Typography></NavLink>
-            <NavLink chosen={chosen==="teams"}>
-                <Typography
-                    variant={"body1"}
-                    className={classes.navLink}
-                >Teams</Typography></NavLink>
-            <NavLink chosen={chosen==="members"}>
-                <Typography
-                    variant={"body1"}
-                    className={classes.navLink}
-                >Members</Typography></NavLink>
-            <NavLink chosen={chosen==="contact-us"}>
-                <Typography
-                    variant={"body1"}
-                    className={classes.navLink}
-                >Contact Us</Typography></NavLink>
+            <NavLink label={"About" as keyof Scroller} onClose={onClose}/>                
+            <NavLink label={"Events" as keyof Scroller} onClose={onClose}/>
+            <NavLink label={"Teams" as keyof Scroller} onClose={onClose}/>
+            <NavLink label={"Members" as keyof Scroller} onClose={onClose}/>
         </div>
     );
 };
