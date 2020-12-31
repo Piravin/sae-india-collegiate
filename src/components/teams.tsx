@@ -202,7 +202,7 @@ const TeamBicycle: React.FC<{teamId: number} | null> = ({teamId}: {teamId: numbe
                 </div>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridB}>
-                <img className={classes.photo} src={process.env.PUBLIC_URL + "/images/srt_team.jpg"} alt="Team SRT"/>
+                <img className={classes.photo} src={process.env.PUBLIC_URL + "/images/srtx.png"} alt="Team SRT"/>
             </Grid>        
         </Grid>
     );
