@@ -9,12 +9,12 @@ import Title from '../illustrations/sae-title.svg';
 const MemberSVG = process.env.PUBLIC_URL + '/images/members.svg';
 const Map = process.env.PUBLIC_URL + '/images/map.svg';
 const images = [
+    process.env.PUBLIC_URL + `/images/srt_team.jpeg`,
     process.env.PUBLIC_URL + `/images/1.jpg`,
     process.env.PUBLIC_URL + `/images/2.jpg`,
+    process.env.PUBLIC_URL + `/images/team_aero_plane.jpg`,
     process.env.PUBLIC_URL + `/images/3.jpg`,
     process.env.PUBLIC_URL + `/images/4.jpg`,
-    process.env.PUBLIC_URL + `/images/aero_team.jpg`,
-    process.env.PUBLIC_URL + `/images/srt_team.jpg`
 ];
 
 const useStyle = makeStyles((theme: Theme) => createStyles({
@@ -171,7 +171,7 @@ const Main: React.FC = () => {
                         </div>
                     </Grid>
                     <Grid item xs={6}>
-                        <div className={classes.mobile}>
+                        <div className={classes.mobile} style={{paddingTop: "10px"}}>
                             <img src={MemberSVG} alt="Over 50000 Members"/>
                             <h1>Over 50000 Members</h1>
                         </div>

@@ -20,10 +20,25 @@ const useStyle = makeStyles((theme: Theme) => createStyles({
     eventFrame: {
         display: "flex",
         padding: "40px",
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('lg')]: {
             overflowX: "scroll",
             flexWrap: "nowrap",
             padding: "20px"
+        },
+        '&::-webkit-scrollbar': {
+            width: "1px",
+            height: "7px",
+            margin: "10px"
+
+        },
+        '&::-webkit-scrollbar-thumb': {
+            borderRadius: '10px',
+            backgroundColor: 'rgba(0,0,0, 0.1)'
+        },
+        '&::-webkit-scrollbar-track': {
+            '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+            backgroundColor: '#F5F5F5',
+            margin: "10px"
         }
     },
     title: {
@@ -155,7 +170,21 @@ SAEISS Bicycle Designing Competition 2k19
                         SASTRA Deemed to be University will be Hosting the Thanjavur Division of SAEINDIA Southern Section.
                         </Typography>
                     </CardContent>
-                    
+                </Card>
+                <Card className={classes.card}>
+                    <CardMedia
+                        className={classes.media}
+                        src={process.env.PUBLIC_URL + "/images/srt_baja.jpg"}
+                        component="img"
+                        title="News1"/>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                        NATRAX- Pithampur
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                        From being one of the heaviest cars in the competition during our first year(284.6 kg) to building a car that cleared the Technical Inspection and competed in the endurance round during our second year(157 kg), we as a team have learnt that there is no substitute for hardwork.
+                        </Typography>
+                    </CardContent>
                 </Card>
             </div>
         </div>

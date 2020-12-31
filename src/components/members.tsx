@@ -92,7 +92,7 @@ const Members = React.forwardRef((props, ref: React.Ref<HTMLDivElement>) => {
                     </Grid>
                     <Grid item xs={8} className={classes.detail}>
                         <h1>Piravin K C M</h1>
-                        <h3>Student Secratery</h3>
+                        <h3>Student Secretary</h3>
                     </Grid>
                 </Grid>
             </div>

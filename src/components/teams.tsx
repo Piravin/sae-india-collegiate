@@ -4,6 +4,7 @@ import React, { Component, ChangeEvent, ReactNode } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import { Theme, withStyles, withTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 //Icons
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -64,6 +65,15 @@ const useStyle = makeStyles((theme: Theme) => createStyles({
         "75%": {transform: "translate(-2px,-12px) scale(1.1)"},
         "100%": {transform: "translate(-4px, -15px) scale(1.3)"}
     },
+    '@keyframes click-me': {
+        "0%": {transform: "translate(0,0) scale(1)"},
+        "10%": {transform: "translate(0,0) scale(1)"},
+        "20%": {transform: "translate(0,0) scale(1)"},
+        "45%": {transform: "translate(-1px, -5px) scale(1.07)"},
+        "60%": {transform: "translate(1px, -8px) scale(1.03)"},
+        "75%": {transform: "translate(-1px, -10px) scale(1.08)"},
+        "100%": {transform: "translate(1px, -12px) scale(1.1)", color: "#008a02"}
+    },
     logo: {
         width: '100px',
         height: 'auto'
@@ -106,7 +116,12 @@ const useStyle = makeStyles((theme: Theme) => createStyles({
         }
     },
     social: {
-        float: "right",
+        display: "flex",
+        alignItems: "center",
+        width: "98%",
+        bottom: "-10px",
+        marginTop: "20px",
+        justifyContent: "center",
         '& a': {
             color: "#444",
             margin: "10px", 
@@ -116,6 +131,9 @@ const useStyle = makeStyles((theme: Theme) => createStyles({
                     animation: "$jump 300ms ease forwards"
                 }
             }
+        },
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: "center"
         }
     },
     insta: {
@@ -133,6 +151,10 @@ const useStyle = makeStyles((theme: Theme) => createStyles({
         }
     },
     web: {
+        '& svg':{
+            animation: "$click-me 500ms ease-out alternate infinite",
+            animationDelay: "3s"
+        },
         '&:hover':{
             '& svg': {
                 color: "#008a02"
@@ -174,6 +196,7 @@ const Team: React.FC<{teamId: number} | null> = ({teamId}: {teamId: number}) => 
                     students as well as the community through our outreach programs
                     and events we take part in.</p>
                 </div>
+                <Hidden smUp>
                 <div className={classes.social}>
                     <a href="https://www.linkedin.com/company/sastra-racing-team/" rel="noreferrer" target="_blank"><LinkedInIcon fontSize="large"/></a>
                     <a href="https://www.facebook.com/SASTRARacingOfficial" rel="noreferrer" target="_blank"><FacebookIcon fontSize="large"/></a>
@@ -181,9 +204,19 @@ const Team: React.FC<{teamId: number} | null> = ({teamId}: {teamId: number}) => 
                     <a href="https://www.youtube.com/channel/UC6Tuvr4QA-T3ggvIZeJZP9Q" rel="noreferrer" target="_blank" className={classes.yt}><YouTubeIcon fontSize="large" /></a>
                     <a href="http://www.srtbaja.in" rel="noreferrer" target="_blank" className={classes.web}><LanguageIcon fontSize="large"/></a>
                 </div>
+                </Hidden>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridB}>
-                <img className={classes.photo} src={process.env.PUBLIC_URL + "/images/srt_team.jpg"} alt="Team SRT"/>
+                <img className={classes.photo} src={process.env.PUBLIC_URL + "/images/srt_team.jpeg"} alt="Team SRT"/>
+                <Hidden smDown>
+                <div className={classes.social}>
+                    <a href="https://www.linkedin.com/company/sastra-racing-team/" rel="noreferrer" target="_blank"><LinkedInIcon fontSize="large"/></a>
+                    <a href="https://www.facebook.com/SASTRARacingOfficial" rel="noreferrer" target="_blank"><FacebookIcon fontSize="large"/></a>
+                    <a href="https://www.instagram.com/sastra_racing_team_baja/" rel="noreferrer" target="_blank" className={classes.insta}><InstagramIcon fontSize="large"/></a>
+                    <a href="https://www.youtube.com/channel/UC6Tuvr4QA-T3ggvIZeJZP9Q" rel="noreferrer" target="_blank" className={classes.yt}><YouTubeIcon fontSize="large" /></a>
+                    <a href="http://www.srtbaja.in" rel="noreferrer" target="_blank" className={classes.web}><LanguageIcon fontSize="large"/></a>
+                </div>
+                </Hidden>
             </Grid>        
         </Grid>
     );
@@ -237,15 +270,25 @@ const TeamAero: React.FC<{teamId: number} | null> = ({teamId}: {teamId: number})
                 We conduct events and workshops frequently on various aero-models such as hovercraft, glider, etc., We also participate in various competitions that happen throughout the year in several institutions.</p>
                     
                 </div>
+                <Hidden smUp>
                 <div className={classes.social}>
                     <a href="https://www.facebook.com/Aeromodelling-club-at-Sastra-547771182249359/" rel="noreferrer"   target="_blank"><FacebookIcon fontSize="large"/></a>
                     <a href="https://www.instagram.com/aeromodelling_club_sastra/" rel="noreferrer" target="_blank" className={classes.insta}><InstagramIcon fontSize="large"/></a>
                     <a href="https://www.youtube.com/channel/UC6W4_FBa4tB_pMbV_urkKsw" rel="noreferrer" target="_blank" className={classes.yt}><YouTubeIcon fontSize="large" /></a>
                     <a href="https://acssastra.wordpress.com/" rel="noreferrer" target="_blank" className={classes.web}><LanguageIcon fontSize="large"/></a>
                 </div>
+                </Hidden>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridB}>
                 <img className={classes.photo} src={process.env.PUBLIC_URL + "/images/aero_team.jpg"} alt="Team Aero Modeling"/>
+                <Hidden smDown>
+                <div className={classes.social}>
+                    <a href="https://www.facebook.com/Aeromodelling-club-at-Sastra-547771182249359/" rel="noreferrer"   target="_blank"><FacebookIcon fontSize="large"/></a>
+                    <a href="https://www.instagram.com/aeromodelling_club_sastra/" rel="noreferrer" target="_blank" className={classes.insta}><InstagramIcon fontSize="large"/></a>
+                    <a href="https://www.youtube.com/channel/UC6W4_FBa4tB_pMbV_urkKsw" rel="noreferrer" target="_blank" className={classes.yt}><YouTubeIcon fontSize="large" /></a>
+                    <a href="https://acssastra.wordpress.com/" rel="noreferrer" target="_blank" className={classes.web}><LanguageIcon fontSize="large"/></a>
+                </div>
+                </Hidden>
             </Grid>        
         </Grid>
     );
@@ -303,12 +346,12 @@ class Teams extends Component<teamProps, teamsState> {
                         <Tab icon={<SRTBLogo/>} id="Team 3"/>
                         <Tab icon={<ETWDCLogo/>} id="Team 4"/>
                 </Tabs>
-                
+                <div style={{position: "relative"}}>
                 {this.state.selectedTeam === 0 && <Team teamId={0}/>}
                 {this.state.selectedTeam === 1 && <TeamAero teamId={1}/>}
                 {this.state.selectedTeam === 2 && <TeamBicycle teamId={2}/>}
                 {this.state.selectedTeam === 3 && <TeamETWDC teamId={3}/>}
-                
+                </div>
             </div>
         );
     }
